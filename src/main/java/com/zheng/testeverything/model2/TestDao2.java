@@ -12,7 +12,6 @@ public class TestDao2 {
     @Autowired
     private TestMapper2 testMapper2;
 
-    @Transactional(transactionManager = "test2TransactionManager")
     public void insert1() throws Exception {
         int a = 1;
         a = a + 1;
@@ -24,6 +23,11 @@ public class TestDao2 {
         String f = a + 5 + "";
         String g = a + 6 + "";
         testMapper2.insert(String.valueOf(a), b, c, d, e, f, g);
-        int i = 1/0;
+        int i = 1 / 0;
+    }
+
+    public String getid(String valueOf) {
+
+        return testMapper2.getid(valueOf);
     }
 }

@@ -6,6 +6,7 @@ import com.zheng.testeverything.model2.TestDao2;
 import com.zheng.testeverything.model2.TestMapper2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
@@ -15,12 +16,6 @@ import java.util.Random;
 @Service
 public class TestTransactionService {
 
-//    @Autowired
-//    private TestMapper1 testMapper1;
-//
-//    @Autowired
-//    private TestMapper2 testMapper2;
-
     @Autowired
     private TestDao1 testDao1;
 
@@ -28,15 +23,15 @@ public class TestTransactionService {
     private TestDao2 testDao2;
 
     public String getid() {
-//        Random random = new Random();
-//        int i = random.nextInt(50000);
-//        String a = testMapper1.getid(String.valueOf(i));
-//        String b = testMapper2.getid(String.valueOf(i));
-//        System.out.println(a);
-//        System.out.println(b);
+        int i = 1;
+        String a = testDao1.getid(String.valueOf(i));
+        String b = testDao2.getid(String.valueOf(i));
+        System.out.println(a);
+        System.out.println(b);
         return "ok";
     }
 
+    @Transactional
     public void insert() throws Exception {
         testDao1.insert1();
         testDao2.insert1();

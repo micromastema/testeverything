@@ -1,4 +1,4 @@
-package com.zheng.testeverything;
+package com.zheng.testeverything.controller;
 
 import com.zheng.testeverything.service.TestTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;

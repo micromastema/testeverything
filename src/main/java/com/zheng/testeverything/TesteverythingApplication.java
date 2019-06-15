@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author zhengchentong
  */
 @SpringBootApplication
-@EnableTransactionManagement
 public class TesteverythingApplication {
 
     public static void main(String[] args) {

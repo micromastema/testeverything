@@ -1,6 +1,6 @@
 package com.zheng.testeverything;
 
-import com.zheng.testeverything.model1.TestMapper1;
+import com.zheng.testeverything.mapper.TestMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Random;
-import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -24,7 +23,7 @@ public class TesteverythingApplicationTests {
     }
 
     @Autowired
-    private TestMapper1 testMapper;
+    private TestMapper testMapper;
 
     @Test
     public void test1(){

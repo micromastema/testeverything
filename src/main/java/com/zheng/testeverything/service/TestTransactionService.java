@@ -1,14 +1,10 @@
 package com.zheng.testeverything.service;
 
 import com.zheng.testeverything.model1.TestDao1;
-import com.zheng.testeverything.model1.TestMapper1;
 import com.zheng.testeverything.model2.TestDao2;
-import com.zheng.testeverything.model2.TestMapper2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Random;
 
 /**
  * @author zhengchentong on 2019-06-15

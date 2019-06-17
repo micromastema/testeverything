@@ -12,7 +12,6 @@ public class TestDao2 {
     @Autowired
     private TestMapper2 testMapper2;
 
-    @Transactional(transactionManager = "test2TransactionManager")
     public void insert1() throws Exception {
         int a = 1;
         a = a + 1;

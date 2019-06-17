@@ -13,7 +13,6 @@ public class TestDao1 {
     @Autowired
     private TestMapper1 testMapper1;
 
-    @Transactional(transactionManager = "test1TransactionManager")
     public void insert1() throws Exception {
         int a = 1;
         a = a + 1;
@@ -25,6 +24,5 @@ public class TestDao1 {
         String f = a + "";
         String g = a + "";
         testMapper1.insert(String.valueOf(a), b, c, d, e, f, g);
-        int i = 1/0;
     }
 }

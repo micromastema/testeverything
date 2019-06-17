@@ -6,6 +6,7 @@ import com.zheng.testeverything.model2.TestDao2;
 import com.zheng.testeverything.model2.TestMapper2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
 
@@ -37,6 +38,7 @@ public class TestTransactionService {
         return "ok";
     }
 
+    @Transactional(transactionManager = "test1TransactionManager")
     public void insert() throws Exception {
         testDao1.insert1();
         testDao2.insert1();

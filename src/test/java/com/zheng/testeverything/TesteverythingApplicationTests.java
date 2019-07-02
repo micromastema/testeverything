@@ -30,7 +30,7 @@ public class TesteverythingApplicationTests {
         testMapper.getid("10");
     }
 
-    @Test
+//    @Test
     public void test2(){
         int a= 0;
         while(true){
@@ -46,7 +46,7 @@ public class TesteverythingApplicationTests {
         }
     }
 
-    @Test
+//    @Test
     public void test3(){
         Random random = new Random();
         LocalDateTime now = LocalDateTime.now();

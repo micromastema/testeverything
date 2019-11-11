@@ -1,6 +1,12 @@
 package com.zheng.testeverything;
 
 import com.zheng.testeverything.model1.TestMapper1;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -70,4 +77,49 @@ public class TesteverythingApplicationTests {
         //500 13.6
         //600 13.7
     }
+
+    @Test
+    public void test4() throws IOException {
+        getMediaV2("wxb4e889634c068377", "Rx7lZ3cY8l838NToSc41EkVpFKcK4sk6xJL-JYRWvJRtgH0xP7cgYgl-lADE0vSF","24__831FXVbqZe3OUclTx9NRfLrpy1AiQi_KWk8jMV6ijsPiC3FUQcbeJ5z3zo_BrN5JVURMUw-MncJd_Bol-31ddhvkv0RS6_u3Sz_qwhvFkFvqQSpeG7Ay_CwzbMtyB2lkvrbsXGJvejMgi4xPOIfAGAIHB");
+    }
+
+    /**
+     * 下载语音文件流
+     *
+     * @param appId
+     * @param mediaId
+     * @return 可能为null
+     */
+    public byte[] getMediaV2(String appId, String mediaId,String accesstoken) throws IOException {
+        Long time = System.currentTimeMillis();
+        byte[] stream = null;
+        //获取请求appId的accessToken
+        String accessToken = accesstoken;
+        String url = "https://api.weixin.qq.com/cgi-bin/media/get?access_token="+accessToken+"&media_id="+mediaId;
+        //发起请求 打印异常信息
+        HttpPost httpPost = new HttpPost(url);
+        try {
+            HttpResponse response = HttpClients.createDefault().execute(httpPost);
+            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                return stream;
+            }
+            HttpEntity responseEntity = response.getEntity();
+            stream= EntityUtils.toByteArray(responseEntity);
+        } catch (IOException e) {
+        }
+        File file = new File("/a.amr");
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        FileInputStream in = new FileInputStream(file);
+        ByteArrayOutputStream out = new ByteArrayOutputStream(4096);
+        int n;
+        while ((n = in.read(stream)) != -1) {
+            out.write(stream, 0, n);
+        }
+        in.close();
+        out.close();
+        return stream;
+    }
+
 }

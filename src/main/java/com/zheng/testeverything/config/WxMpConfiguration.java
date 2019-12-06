@@ -14,7 +14,7 @@ import java.util.Map;
 public class WxMpConfiguration {
 
     @Bean
-    public WxMpConfiguration wxMpService() {
+    public WxMpService wxMpService() {
         WxMpService service = new WxMpServiceImpl();
 
         WxMpDefaultConfigImpl configStorage = new WxMpDefaultConfigImpl();
@@ -27,6 +27,6 @@ public class WxMpConfiguration {
         wxMap.put("appid", configStorage);
 
         service.setMultiConfigStorages(wxMap);
-        return null;
+        return service;
     }
 }

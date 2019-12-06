@@ -34,6 +34,7 @@ public class TestController {
         boolean b = wxMpService.checkSignature(timestamp, nonce, signature);
         List<String> openidList = new ArrayList<>();
         try {
+            //最多一次一百条
             List<WxMpUser> wxMpUsers = wxMpService.getUserService().userInfoList(openidList);
         } catch (WxErrorException e) {
             e.printStackTrace();

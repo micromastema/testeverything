@@ -3,19 +3,18 @@ package com.zheng.testeverything.controller;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author zhengct
- * @date 2019-12-7
+ * @date 2019/12/7
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("test")
 public class TestController {
 
     private final WxMpService wxMpService;
@@ -49,5 +48,9 @@ public class TestController {
         return "非法请求";
     }
 
-
+    @PostMapping("/test")
+    public String test(String signature) {
+        System.out.print(signature);
+        return "test";
+    }
 }

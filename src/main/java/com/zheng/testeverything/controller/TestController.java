@@ -48,8 +48,10 @@ public class TestController {
         return "非法请求";
     }
 
-    @PostMapping("/test")
-    public String test(String signature) {
+    @PostMapping(value = "/test",produces = "application/json; charset=UTF-8")
+    public String test(
+                       @RequestParam(name = "signature", required = false) String signature,
+                       @RequestParam(name = "msg_signature", required = false) String msgSignature) {
         System.out.print(signature);
         return "test";
     }

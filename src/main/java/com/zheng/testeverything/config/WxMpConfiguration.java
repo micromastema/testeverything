@@ -32,8 +32,8 @@ public class WxMpConfiguration {
         songshuConfigStorage.setAccessToken("28_K2eyrJMCBsQLoTuCcFOfFVsDNI5N0Xl4OgMgqY66jer4vdugxgAXDAqHmA8bA9hYAT0Dd10R4tqDLaC0by0VqzRBsTPurr0OxqTrkg_53o1JLvGMhcaDly5XqkbiDxaxJdczNsCPjYT8fgilDSKfAHANCU");
 
         Map<String,WxMpConfigStorage> wxMap = new HashMap<>();
-        wxMap.put("appid", ivykidConfigStorage);
-        wxMap.put("songshu", songshuConfigStorage);
+        wxMap.put("ivykid", ivykidConfigStorage);
+//        wxMap.put("songshu", songshuConfigStorage);
 
         service.setMultiConfigStorages(wxMap);
         return service;

@@ -1,6 +1,7 @@
 package com.zheng.testeverything;
 
 import com.zheng.testeverything.service.TestService;
+import me.chanjar.weixin.common.error.WxErrorException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class TesteverythingApplicationTests {
     private TestService testService;
 
     @Test
-    public void test() {
+    public void test() throws WxErrorException {
         testService.test();
     }
 }

@@ -22,7 +22,8 @@ public class TestController {
         Message message = new Message();
         message.setBody("aaa".getBytes());
         message.setTag("TAG_IVYKID");
-        message.setTopic("TOPIC_IVYKID");
+        message.setTopic("TOPIC_DELAYMESSAGE");
+        message.setStartDeliverTime(30000);
         producer.send(message);
         return "s";
     }

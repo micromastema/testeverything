@@ -60,7 +60,7 @@ public class RocketMQConfig {
     @Bean
     public Consumer consumer() {
         Consumer consumer = ONSFactory.createConsumer(this.getConsumerProperties());
-        consumer.subscribe("TOPIC_IVYKID", "TAG_IVYKID", consumerListener);
+        consumer.subscribe("TOPIC_DELAYMESSAGE", "TAG_IVYKID", consumerListener);
         consumer.start();
         return consumer;
     }

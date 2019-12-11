@@ -33,12 +33,6 @@
             <artifactId>ons-client</artifactId>
             <version>1.8.4.Final</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.rocketmq/rocketmq-client -->
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-            <version>4.5.2</version>
-        </dependency>
 
 
 

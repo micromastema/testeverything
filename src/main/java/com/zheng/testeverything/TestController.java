@@ -23,7 +23,7 @@ public class TestController {
         message.setBody("aaa".getBytes());
         message.setTag("TAG_IVYKID");
         message.setTopic("TOPIC_DELAYMESSAGE");
-        message.setStartDeliverTime(30000);
+        message.setStartDeliverTime(System.currentTimeMillis() + 5000);
         producer.send(message);
         return "s";
     }

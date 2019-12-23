@@ -1,36 +1,19 @@
 spring:
-  datasource:
-    d1:
-      jdbc-url: jdbc:mysql://localhost:3306/database1?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
-      type: com.zaxxer.hikari.HikariDataSource
-      hikari:
-        minimum-idle: 1
-        maximum-pool-size: 1
-        max-lifetime: 1800000
-        connection-timeout: 30000
-        connection-test-query: select 1
-    d2:
-      jdbc-url: jdbc:mysql://localhost:3306/database2?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
-      type: com.zaxxer.hikari.HikariDataSource
-      hikari:
-        minimum-idle: 1
-        maximum-pool-size: 1
-        max-lifetime: 1800000
-        connection-timeout: 30000
-        connection-test-query: select 1
   data:
     mongodb:
-      host: 47.93.191.85
-      port: 27017
-      database: delta-customer
-      username: ivykid_test
-      password: qingclass@123
+      customer:
+        host: 10.70.0.17
+        port: 27017
+        database: saas_customer
+        username: qingclass
+        password: xCDMBKeKDJ#s
+      course:
+        host: 10.70.0.17
+        port: 27017
+        database: saas_course
+        username: qingclass
+        password: xCDMBKeKDJ#s
+        authentication-database: admin
 server:
   tomcat:
     uri-encoding: utf-8

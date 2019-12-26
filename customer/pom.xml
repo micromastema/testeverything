@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>groupId</groupId>
-    <artifactId>course</artifactId>
+    <artifactId>customer</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <parent>
@@ -13,7 +13,6 @@
         <artifactId>testeverything</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
 
     <dependencies>
         <dependency>

@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  * @author zhengchentong on 2019-06-15
  */
 @Configuration //注册到springboot 容器中
-@MapperScan(basePackages = "com.zheng.testeverything.model2", sqlSessionTemplateRef = "test2SqlSessionTemplate")
+@MapperScan(basePackages = "com.zheng.course.model2", sqlSessionTemplateRef = "test2SqlSessionTemplate")
 public class DataSourceConfig2 {
 
     @Bean(name = "test2DataSource")

@@ -1,4 +1,4 @@
-package com.zheng.course.config;
+package com.zheng.customer.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -17,17 +17,17 @@ import javax.sql.DataSource;
  * @author zhengchentong on 2019-06-15
  */
 @Configuration //注册到springboot 容器中
-@MapperScan(basePackages = "com.zheng.testeverything.model2", sqlSessionTemplateRef = "test2SqlSessionTemplate")
-public class DataSourceConfig2 {
+@MapperScan(basePackages = "com.zheng.testeverything.model2", sqlSessionTemplateRef = "test4SqlSessionTemplate")
+public class DataSourceConfig4 {
 
-    @Bean(name = "test2DataSource")
+    @Bean(name = "test4DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.d2")
     public DataSource testDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "test2SqlSessionFactory")
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("test2DataSource") DataSource dataSource) throws Exception {
+    @Bean(name = "test4SqlSessionFactory")
+    public SqlSessionFactory testSqlSessionFactory(@Qualifier("test4DataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         //加载其他文件，如mapper.xml
@@ -36,13 +36,13 @@ public class DataSourceConfig2 {
     }
 
     //事务管理
-    @Bean(name = "test2TransactionManager")
-    public DataSourceTransactionManager testTransactionManager(@Qualifier("test2DataSource") DataSource dataSource) {
+    @Bean(name = "test4TransactionManager")
+    public DataSourceTransactionManager testTransactionManager(@Qualifier("test4DataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "test2SqlSessionTemplate")
-    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("test2SqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    @Bean(name = "test4SqlSessionTemplate")
+    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("test4SqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 

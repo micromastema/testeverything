@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    d1:
+      jdbc-url: jdbc:mysql://localhost:3306/database1?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        minimum-idle: 1
+        maximum-pool-size: 1
+        max-lifetime: 1800000
+        connection-timeout: 30000
+        connection-test-query: select 1
+    d2:
+      jdbc-url: jdbc:mysql://localhost:3306/database2?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: 123456
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        minimum-idle: 1
+        maximum-pool-size: 1
+        max-lifetime: 1800000
+        connection-timeout: 30000
+        connection-test-query: select 1
+#  data:
+#    mongodb: #haixing
+#      host: dds-bp19335bd09c5a641.mongodb.rds.aliyuncs.com
+#      port: 3717
+#      database: delta-customer
+#      username: ivykid_prod
+#      password: ivykid123
+##      mongodb: #saas
+##        host: 10.70.0.17
+##        port: 27017
+##        database: saas-customer
+##        username: qingclass
+##        password: xCDMBKeKDJ#s
+##        authentication-database: admin
+server:
+  tomcat:
+    uri-encoding: utf-8
+    max-threads: 200
+    max-connections: 10000
+
+logging:
+  level:
+    com: info
+#    com: debug

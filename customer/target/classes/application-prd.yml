@@ -1,18 +1,6 @@
 spring:
   datasource:
     d1:
-      jdbc-url: jdbc:mysql://localhost:3306/database1?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
-      type: com.zaxxer.hikari.HikariDataSource
-      hikari:
-        minimum-idle: 1
-        maximum-pool-size: 1
-        max-lifetime: 1800000
-        connection-timeout: 30000
-        connection-test-query: select 1
-    d2:
       jdbc-url: jdbc:mysql://localhost:3306/database2?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
@@ -24,6 +12,18 @@ spring:
         max-lifetime: 1800000
         connection-timeout: 30000
         connection-test-query: select 1
+#    d2:
+#      jdbc-url: jdbc:mysql://localhost:3306/database2?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=Asia/Shanghai
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      username: root
+#      password: 123456
+#      type: com.zaxxer.hikari.HikariDataSource
+#      hikari:
+#        minimum-idle: 1
+#        maximum-pool-size: 1
+#        max-lifetime: 1800000
+#        connection-timeout: 30000
+#        connection-test-query: select 1
 #  data:
 #    mongodb: #haixing
 #      host: dds-bp19335bd09c5a641.mongodb.rds.aliyuncs.com

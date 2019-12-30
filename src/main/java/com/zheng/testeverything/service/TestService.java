@@ -1,5 +1,10 @@
 package com.zheng.testeverything.service;
 
+import com.github.binarywang.wxpay.bean.entpay.EntPayRequest;
+import com.github.binarywang.wxpay.exception.WxPayException;
+import com.github.binarywang.wxpay.service.WxPayService;
+import com.zheng.testeverything.config.MultiPay;
+import org.springframework.beans.factory.annotation.Autowired;
 import me.chanjar.weixin.common.bean.WxAccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -10,12 +15,28 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author zhengchentong on 2019-06-15
  */
 @Service
 public class TestService {
 
+    @Autowired
+    private MultiPay multiPay;
+
+    public void test1() {
+        WxPayService wxPayService = multiPay.getWxPayService(1 + "");
+        EntPayRequest entPayRequest = new EntPayRequest();
+
+        try {
+            wxPayService.getEntPayService().entPay(entPayRequest);
+        } catch (WxPayException e) {
+            e.printStackTrace();
+        }
+    }
     @Autowired
     private WxMpService wxMpService;
 

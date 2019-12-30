@@ -29,8 +29,7 @@ public class TestTransactionService {
 
         ByteArrayInputStream byteArrayInputStream= new ByteArrayInputStream("aaa".getBytes());
         PutObjectResult key = ossClient.putObject(bucketName, "key.txt", byteArrayInputStream);
-//        key.getResponse().ge
-        https://qingclasstest.oss-cn-hangzhou.aliyuncs.com/key?Expires=1577695279&OSSAccessKeyId=TMP.hhqHsRWdRDTZ3yExgH1udRiS7k1HrawDwsBdyxJeHuifWg6xBTXWXx21UsjAanUdSz1wejQU94EDeHFxaLpBxrDnnwZFALAeDpphoJ376Qu2XSupvf51iCA75cFEwj.tmp&Signature=84OOu4YL%2FtrQiU5sV8Joj%2F4rV9M%3D
+//        key.getResponse().ge https://qingclasstest.oss-cn-hangzhou.aliyuncs.com/key?Expires=1577695279&OSSAccessKeyId=TMP.hhqHsRWdRDTZ3yExgH1udRiS7k1HrawDwsBdyxJeHuifWg6xBTXWXx21UsjAanUdSz1wejQU94EDeHFxaLpBxrDnnwZFALAeDpphoJ376Qu2XSupvf51iCA75cFEwj.tmp&Signature=84OOu4YL%2FtrQiU5sV8Joj%2F4rV9M%3D
         System.out.println(key);
         // 关闭OSSClient。
         ossClient.shutdown();

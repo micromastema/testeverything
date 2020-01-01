@@ -29,10 +29,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.aliyun.openservices</groupId>
-            <artifactId>ons-client</artifactId>
-            <version>1.8.4.Final</version>
+            <groupId>com.aliyun.mq</groupId>
+            <artifactId>mq-http-sdk</artifactId>
+            <version>1.0.1</version>
         </dependency>
+
 
 
 

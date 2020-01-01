@@ -1,68 +1,110 @@
 package com.zheng.testeverything.config;
 
-import com.aliyun.openservices.ons.api.Consumer;
-import com.aliyun.openservices.ons.api.ONSFactory;
-import com.aliyun.openservices.ons.api.Producer;
-import com.aliyun.openservices.ons.api.PropertyKeyConst;
-import com.aliyun.openservices.ons.api.bean.ConsumerBean;
-import com.aliyun.openservices.ons.api.bean.ProducerBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import com.aliyun.mq.http.MQClient;
+import com.aliyun.mq.http.MQConsumer;
+import com.aliyun.mq.http.MQProducer;
+import com.aliyun.mq.http.common.AckMessageException;
+import com.aliyun.mq.http.common.http.ClientConfiguration;
+import com.aliyun.mq.http.model.Message;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-import java.util.Properties;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
- * @author zhengct
- * @date 2019/12/8
+ * RocketMQ配置
  */
 @Configuration
-@Component
 public class RocketMQConfig {
-    private String producerId = "GID_IVYKID";
-    private String consumerId = "GID_IVYKID";
+
+    private String groupid = "GID_IVYKID_HTTP";
     private String accesskey = "LTAI4Ffsd7EspeKbiNUk3p2S";
-    private String secretkey="A4uMfT0c38Cru2ttWMPF2qSGNhekYu";
-    private String onsaddr="http://MQ_INST_1034468624965622_BbbC9Tds.cn-hangzhou.mq-internal.aliyuncs.com:8080";
+    private String secretkey = "A4uMfT0c38Cru2ttWMPF2qSGNhekYu";
+    private String nameAddr = "http://1034468624965622.mqrest.cn-beijing.aliyuncs.com";
+    private String topic = "TOPIC_DELAYMESSAGE_TEST";
+    private String tag = "TAG_IVYKID";
 
-    @Autowired
-    private ConsumerListener consumerListener;
-
-    //提供消费者的配置
-    Properties getConsumerProperties() {
-        Properties consumerProperties = new Properties();
-        consumerProperties.setProperty(PropertyKeyConst.ConsumerId, consumerId);
-        consumerProperties.setProperty(PropertyKeyConst.AccessKey, accesskey);
-        consumerProperties.setProperty(PropertyKeyConst.SecretKey, secretkey);
-        consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, onsaddr);
-        return consumerProperties;
-    }
-    //提供生产者的配置
-    Properties getProducerProperties() {
-        Properties producerProperties = new Properties();
-        producerProperties.setProperty(PropertyKeyConst.ProducerId, producerId);
-        producerProperties.setProperty(PropertyKeyConst.AccessKey, accesskey);
-        producerProperties.setProperty(PropertyKeyConst.SecretKey, secretkey);
-        producerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, onsaddr);
-        return producerProperties;
-    }
-
+    /**
+     * 生产者配置
+     *
+     * @return
+     */
     @Bean
-    public Producer producer() {
-        Producer producer = ONSFactory.createProducer(getProducerProperties());
-        producer.start();
-        return producer;
+    public MQProducer mqProducer() {
+        ClientConfiguration clientConfiguration = new ClientConfiguration();
+        MQClient mqClient = new MQClient(nameAddr, accesskey, secretkey, clientConfiguration);
+
+        return mqClient.getProducer(topic);
     }
 
+    /**
+     * 消费者1配置
+     *
+     * @return
+     */
     @Bean
-    public Consumer consumer() {
-        Consumer consumer = ONSFactory.createConsumer(this.getConsumerProperties());
-        consumer.subscribe("TOPIC_DELAYMESSAGE", "TAG_IVYKID", consumerListener);
-        consumer.start();
-        return consumer;
-    }
+    public MQConsumer consumer() {
+        ClientConfiguration clientConfiguration = new ClientConfiguration();
+        MQClient mqClient = new MQClient(nameAddr, accesskey, secretkey, clientConfiguration);
+        MQConsumer consumer = mqClient.getConsumer(topic, groupid);
+        // 在当前线程循环消费消息，建议是多开个几个线程并发消费消息
+        do {
+            List<Message> messages = null;
 
+            try {
+                // 长轮询消费消息
+                // 长轮询表示如果topic没有消息则请求会在服务端挂住3s，3s内如果有消息可以消费则立即返回
+                messages = consumer.consumeMessage(
+                        3,// 一次最多消费3条(最多可设置为16条)
+                        3// 长轮询时间3秒（最多可设置为30秒）
+                );
+            } catch (Throwable e) {
+                e.printStackTrace();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            // 没有消息
+            if (messages == null || messages.isEmpty()) {
+                System.out.println(Thread.currentThread().getName() + ": no new message, continue!");
+                continue;
+            }
+
+            // 处理业务逻辑
+            for (Message message : messages) {
+                System.out.println("业务逻辑: " + message);
+            }
+
+            // Message.nextConsumeTime前若不确认消息消费成功，则消息会重复消费
+            // 消息句柄有时间戳，同一条消息每次消费拿到的都不一样
+            {
+                List<String> handles = new ArrayList<String>();
+                for (Message message : messages) {
+                    handles.add(message.getReceiptHandle());
+                }
+
+                try {
+                    consumer.ackMessage(handles);
+                } catch (Throwable e) {
+                    // 某些消息的句柄可能超时了会导致确认不成功
+                    if (e instanceof AckMessageException) {
+                        AckMessageException errors = (AckMessageException) e;
+                        System.out.println("Ack message fail, requestId is:" + errors.getRequestId() + ", fail handles:");
+                        if (errors.getErrorMessages() != null) {
+                            for (String errorHandle : errors.getErrorMessages().keySet()) {
+                                System.out.println("Handle:" + errorHandle + ", ErrorCode:" + errors.getErrorMessages().get(errorHandle).getErrorCode()
+                                        + ", ErrorMsg:" + errors.getErrorMessages().get(errorHandle).getErrorMessage());
+                            }
+                        }
+                        continue;
+                    }
+                    e.printStackTrace();
+                }
+            }
+        } while (true);
+    }
 }

@@ -4,15 +4,11 @@ import com.aliyun.openservices.ons.api.Consumer;
 import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.Producer;
 import com.aliyun.openservices.ons.api.PropertyKeyConst;
-import com.aliyun.openservices.ons.api.bean.ConsumerBean;
-import com.aliyun.openservices.ons.api.bean.ProducerBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Properties;
 
 /**
@@ -25,8 +21,8 @@ public class RocketMQConfig {
     private String producerId = "GID_IVYKID";
     private String consumerId = "GID_IVYKID";
     private String accesskey = "LTAI4Ffsd7EspeKbiNUk3p2S";
-    private String secretkey="A4uMfT0c38Cru2ttWMPF2qSGNhekYu";
-    private String onsaddr="http://MQ_INST_1034468624965622_BbbC9Tds.cn-hangzhou.mq-internal.aliyuncs.com:8080";
+    private String secretkey = "A4uMfT0c38Cru2ttWMPF2qSGNhekYu";
+    private String onsaddr = "http://MQ_INST_1034468624965622_BbbC9Tds.cn-hangzhou.mq-internal.aliyuncs.com:8080";
 
     @Autowired
     private ConsumerListener consumerListener;
@@ -40,6 +36,7 @@ public class RocketMQConfig {
         consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, onsaddr);
         return consumerProperties;
     }
+
     //提供生产者的配置
     Properties getProducerProperties() {
         Properties producerProperties = new Properties();

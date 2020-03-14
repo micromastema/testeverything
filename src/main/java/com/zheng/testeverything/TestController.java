@@ -1,7 +1,7 @@
 package com.zheng.testeverything;
 
-import com.zheng.testeverything.service.TestTransactionService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,17 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class TestController {
 
-    @Autowired
-    private TestTransactionService testTransactionService;
-
-    @RequestMapping("/test1")
-    public String test1() {
-        return testTransactionService.getid();
+    @GetMapping("/a")
+    public String a(){
+        return "{\"code\":0,\"data\":[{\"productId\":\"100001\",\"productName\":\"小度人工智能音箱\",\"productPrice\":99,\"productNum\":2,\"productImage\":\"1.jpg\",\"checked\":false},{\"productId\":\"100002\",\"productName\":\"小度小金刚\",\"productPrice\":159,\"productNum\":5,\"productImage\":\"2.jpg\",\"checked\":true},{\"productId\":\"100003\",\"productName\":\"小度在家1c\",\"productPrice\":499,\"productNum\":1,\"productImage\":\"3.jpg\",\"checked\":true},{\"productId\":\"100004\",\"productName\":\"小度大金刚\",\"productPrice\":199,\"productNum\":3,\"productImage\":\"4.jpg\",\"checked\":true},{\"productId\":\"100005\",\"productName\":\"小度青春版\",\"productPrice\":69,\"productNum\":2,\"productImage\":\"5.png\",\"checked\":false},{\"productId\":\"100006\",\"productName\":\"小度人工智能Pro\",\"productPrice\":299,\"productNum\":1,\"productImage\":\"6.jpg\",\"checked\":true}],\"message\":\"\"}";
     }
 
-    @RequestMapping("/test2")
-    public String test2() throws Exception {
-        testTransactionService.insert();
-        return "ok";
-    }
 }

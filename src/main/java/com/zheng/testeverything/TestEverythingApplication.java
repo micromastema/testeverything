@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author zhengchentong
  */
 @SpringBootApplication
-public class TesteverythingApplication {
+public class TestEverythingApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TesteverythingApplication.class, args);
+        SpringApplication.run(TestEverythingApplication.class, args);
     }
 
 }

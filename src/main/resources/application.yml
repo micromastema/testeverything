@@ -1,31 +1,13 @@
-spring:
-  datasource:
-    d1:
-      jdbc-url: jdbc:mysql://localhost:3306/database1?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
-      type: com.zaxxer.hikari.HikariDataSource
-      hikari:
-        minimum-idle: 100
-        maximum-pool-size: 100
-        max-lifetime: 1800000
-        connection-timeout: 30000
-        connection-test-query: select 1
-    d2:
-      jdbc-url: jdbc:mysql://localhost:3306/database2?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
-      type: com.zaxxer.hikari.HikariDataSource
-      hikari:
-        minimum-idle: 100
-        maximum-pool-size: 100
-        max-lifetime: 1800000
-        connection-timeout: 30000
-        connection-test-query: select 1
 server:
-  tomcat:
-    uri-encoding: utf-8
-    max-threads: 200
-    max-connections: 10000
+  port: 8080
+spring:
+  application:
+    name: testeverything
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus'
+  metrics:
+    tags:
+      application: ${spring.application.name}

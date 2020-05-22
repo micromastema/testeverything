@@ -2,7 +2,23 @@ package com.zheng.testeverything;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.sql.*;
+
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * @author zhengchentong on 2019-06-15
  */
@@ -10,35 +26,23 @@ import java.sql.*;
 @RequestMapping("/")
 public class TestController {
 
+    @Autowired
+    @Qualifier("hiveJdbcDataSource")
+    org.apache.tomcat.jdbc.pool.DataSource jdbcDataSource;
 
-    private static String driverName = "org.apache.hive.jdbc.HiveDriver";
-    private static String url = "jdbc:hive2://kafka-zk1.neibu.koolearn.com:22181/neibu";
-    private static String user = "college";
-    private static String password = "35f2";
-
-    private static Connection conn = null;
-    private static Statement stmt = null;
-    private static ResultSet rs = null;
+    @Autowired
+    @Qualifier("hiveDruidDataSource")
+    DataSource druidDataSource;
 
     @RequestMapping("/test2")
     public String test2() throws Exception {
-        Class.forName(driverName);
-        conn = DriverManager.getConnection(url,user,password);
-        stmt = conn.createStatement();
-        String sql = "show databases;";
-        System.out.println("Running: " + sql);
-        rs = stmt.executeQuery(sql);
-        while (rs.next()) {
-            System.out.println(rs.getString(1));
-        }
-        if ( rs != null) {
-            rs.close();
-        }
-        if (stmt != null) {
-            stmt.close();
-        }
-        if (conn != null) {
-            conn.close();
+        List<String> list = new ArrayList<String>();
+         Statement statement = jdbcDataSource.getConnection().createStatement();
+//        Statement statement = druidDataSource.getConnection().createStatement();
+        String sql = "show tables";
+        ResultSet res = statement.executeQuery(sql);
+        while (res.next()) {
+            list.add(res.getString(1));
         }
         return "ok";
     }

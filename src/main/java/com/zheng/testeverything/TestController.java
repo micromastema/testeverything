@@ -39,10 +39,10 @@ public class TestController {
         List<String> list = new ArrayList<String>();
          Statement statement = jdbcDataSource.getConnection().createStatement();
 //        Statement statement = druidDataSource.getConnection().createStatement();
-        String sql = "show tables";
+        String sql = "select * from im_pe_im_user limit 10";
         ResultSet res = statement.executeQuery(sql);
         while (res.next()) {
-            list.add(res.getString(1));
+            list.add(res.getString(2));
         }
         return "ok";
     }

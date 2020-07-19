@@ -1,15 +1,13 @@
 package com.zheng.testeverything;
 
+import org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author zhengchentong
  */
-@SpringBootApplication
-@EnableTransactionManagement
+@SpringBootApplication(exclude = SpringBootConfiguration.class)
 public class TesteverythingApplication {
 
     public static void main(String[] args) {

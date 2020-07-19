@@ -10,21 +10,13 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface TestMapper2 {
 
-    @Select("select teacher from t1 where username = #{username}")
-    public String getid(String username);
+    @Select("select username from user where id = #{id}")
+    String getid(int id);
 
     /**
      * aa
-     *
-     * @param a a
-     * @param b b
-     * @param c c
-     * @param d c
-     * @param e c
-     * @param f c
-     * @param g c
      */
-    @Insert("INSERT INTO `database2`.`t1`(`username`, `password`, `sex`, `class`, `teacher`, `teachername`, `father`, `mather`, `parent`, `son`, `sister`, `haha`) VALUES (#{a},  #{b} ,  #{c} ,  #{d} ,  #{e} ,  #{f} ,  #{g} ,  #{a} ,  #{b} ,  #{a} ,  #{a} ,  #{a} )")
-    public void insert(String a, String b, String c, String d, String e, String f, String g);
+    @Insert("INSERT INTO `user` (`id`, `username`) VALUES (#{id},#{username})")
+    void insert(int id, String username);
 
 }

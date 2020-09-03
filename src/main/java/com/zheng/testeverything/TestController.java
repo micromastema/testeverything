@@ -1,7 +1,10 @@
 package com.zheng.testeverything;
 
-import com.zheng.testeverything.service.TestTransactionService;
+import com.zheng.testeverything.mapper.LogMapper;
+import com.zheng.testeverything.model.Log;
+import com.zheng.testeverything.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,16 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @Autowired
-    private TestTransactionService testTransactionService;
+    private LogMapper logMapper;
+    @Autowired
+    private LogService logService;
 
-    @RequestMapping("/test1")
-    public String test1() {
-        return testTransactionService.getid();
-    }
+    @GetMapping("/t")
+    public void test(){
+        Log byId = logMapper.findById(1L);
 
-    @RequestMapping("/test2")
-    public String test2() throws Exception {
-        testTransactionService.insert();
-        return "ok";
+        System.out.println("");
+
     }
 }

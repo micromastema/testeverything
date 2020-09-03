@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zheng.testeverything.mapper.LogMapper">
+	<resultMap id="Log_ResultMap" type="com.zheng.testeverything.model.Log">
+		<id column="id" property="id" />
+		<result column="account" property="account" />
+		<result column="action" property="action" />
+		<result column="content" property="content" />
+		<result column="create_time" property="createTime" />
+	</resultMap>
+
+	<sql id="Log_Column_List">
+		id,
+		account,
+		action,
+		content,
+		create_time
+	</sql>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.zheng.testeverything.model.Log" >
+		insert into log (
+			id,
+			account,
+			action,
+			content,
+			create_time
+		)
+		values (
+			#{id},
+			#{account},
+			#{action},
+			#{content},
+			#{createTime}
+		)
+	</insert>
+
+	<insert id="insertBatch" useGeneratedKeys="true" keyProperty="id" parameterType="java.util.List" >
+		insert into log (
+			id,
+			account,
+			action,
+			content,
+			create_time
+		)
+		values 
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+		  (
+			#{item.id},
+			#{item.account},
+			#{item.action},
+			#{item.content},
+			#{item.createTime}
+		  )
+		</foreach>
+	</insert>
+
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from log where id = #{id}
+	</delete>
+
+    <delete id="deleteBatch" parameterType="com.zheng.testeverything.model.Log" resultType="int">
+        DELETE FROM log
+        <where>
+                <if test='id != null'>and id = #{id}</if>
+                <if test='account != null'>and account = #{account}</if>
+                <if test='action != null'>and action = #{action}</if>
+                <if test='content != null'>and content = #{content}</if>
+                <if test='createTime != null'>and create_time = #{createTime}</if>
+        </where>
+    </delete>
+
+	<update id="updateById" parameterType="java.lang.Long">
+		update log
+			<set>
+				<if test="account != null">
+					account = #{account},
+				</if>
+				<if test="action != null">
+					action = #{action},
+				</if>
+				<if test="content != null">
+					content = #{content},
+				</if>
+			</set>
+		where id = #{id}
+	</update>
+
+    <update id="updateByExample" parameterType="com.zheng.testeverything.model.Log">
+        update `log`
+        <set>
+                <if test="value.id != null">
+                    id = #{value.id},
+                </if>
+                <if test="value.account != null">
+                    account = #{value.account},
+                </if>
+                <if test="value.action != null">
+                    action = #{value.action},
+                </if>
+                <if test="value.content != null">
+                    content = #{value.content},
+                </if>
+                <if test="value.createTime != null">
+                    create_time = #{value.createTime}
+                </if>
+        </set>
+        <where>
+            <if test='search.id != null'>AND `id` = #{search.id}</if>
+            <if test='search.account != null'>AND `account` = #{search.account}</if>
+            <if test='search.action != null'>AND `action` = #{search.action}</if>
+            <if test='search.content != null'>AND `content` = #{search.content}</if>
+            <if test='search.createTime != null'>AND `create_time` = #{search.createTime}</if>
+        </where>
+    </update>
+	
+	<select id="findById" parameterType="java.lang.Long" resultMap="Log_ResultMap">
+		select
+			<include refid="Log_Column_List" />
+			from log
+		where id = #{id}
+	</select>
+	
+	<select id="findByExampleCount" parameterType="com.zheng.testeverything.model.Log" resultType="int" >
+		select
+			count(id)
+			from log
+		 <where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="account != null">
+				and account = #{account}
+			</if>
+			<if test="action != null">
+				and action = #{action}
+			</if>
+			<if test="content != null">
+				and content = #{content}
+			</if>
+			<if test="createTime != null">
+				and create_time = #{createTime}
+			</if>
+		 </where>
+	</select>
+
+	<select id="findByExample" parameterType="com.zheng.testeverything.model.Log" resultMap="Log_ResultMap" >
+		select
+			<include refid="Log_Column_List" />
+			from log
+		 <where>
+			<if test="log.id != null">
+				and id = #{log.id}
+			</if>
+			<if test="log.account != null">
+				and account = #{log.account}
+			</if>
+			<if test="log.action != null">
+				and action = #{log.action}
+			</if>
+			<if test="log.content != null">
+				and content = #{log.content}
+			</if>
+			<if test="log.createTime != null">
+				and create_time = #{log.createTime}
+			</if>
+		 </where>
+		 <include refid="sqlEnd"/>
+	</select>
+
+    <select id="findByListCount" parameterType="map" resultType="int">
+        select count(id)
+        from log
+        <where>
+            <if test="entity.id != null">
+                and id = #{entity.id}
+            </if>
+            <if test="entity.account != null">
+                and account = #{entity.account}
+            </if>
+            <if test="entity.action != null">
+                and action = #{entity.action}
+            </if>
+            <if test="entity.content != null">
+                and content = #{entity.content}
+            </if>
+            <if test="entity.createTime != null">
+                and create_time = #{entity.createTime}
+            </if>
+            <if test="column != null and valueList != null">
+                and ${column} in
+                <foreach collection="valueList" item="value" index="" open="('" separator="','" close="')">${value}</foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="findByList" resultMap="Log_ResultMap" >
+        select
+            <include refid="Log_Column_List" />
+        from log
+        <where>
+             <if test="log.id != null">
+                 and id = #{log.id}
+             </if>
+             <if test="log.account != null">
+                 and account = #{log.account}
+             </if>
+             <if test="log.action != null">
+                 and action = #{log.action}
+             </if>
+             <if test="log.content != null">
+                 and content = #{log.content}
+             </if>
+             <if test="log.createTime != null">
+                 and create_time = #{log.createTime}
+             </if>
+            <if test="column != null and valueList != null">
+                and ${column} in
+                <foreach collection="valueList" item="value" index="" open="('" separator="','" close="')">${value}</foreach>
+            </if>
+        </where>
+		<include refid="sqlEnd"/>
+    </select>
+
+    <sql id="sqlEnd">
+	${orderBean}
+        <if test="page!=null">
+            limit ${page.startPosition} ,${page.pageSize}
+        </if>
+    </sql>
+
+</mapper>

@@ -31,10 +31,10 @@ public class TestController {
 
     @GetMapping("/t")
     public void test(){
-        Log byId = logMapper.findById(1L);
-        Log byId1 = logService.findById(1L);
+        Log byId = logMapper.findById(3L);
+        Log byId1 = logService.findById(5L);
 
-        Log build = Log.builder().id(1L).account("a").build();
+        Log build = Log.builder().id(3L).account("1").build();
         Page page = new Page(1, 10);
         OrderBean orderBean = new OrderBean(LogConstants.ID, OrderEnum.DESC);
         List<Log> byExample = logMapper.findByExample(build, new Page(), orderBean);
@@ -42,7 +42,8 @@ public class TestController {
         Integer byExampleCount = logMapper.findByExampleCount(build);
         PageList<Log> byExamplePage = logService.findByExamplePage(build, page, orderBean);
 
-        Integer integer = logMapper.deleteById(1L);
+        Integer integer = logMapper.deleteById(3L);
+        build.setId(null);
         Integer integer1 = logMapper.deleteBatch(build);
         Log build1 = Log.builder().createTime(new Date()).account("1").action("2").content("3").build();
         Integer insert = logMapper.insert(build1);
@@ -55,13 +56,17 @@ public class TestController {
         Integer integer4 = logMapper.deleteBatch(build1);
         Log build3 = Log.builder().createTime(new Date()).account("1").action("2").content("3").build();
         List<Object> idList = new ArrayList<>();
-        idList.add(1L);
-        idList.add(2L);
-        List<Log> byList1 = logMapper.findByList(build3, LogConstants.ID, idList, page, orderBean);
+        idList.add("1");
+        List<Log> byList1 = logMapper.findByList(Log.builder().build(), LogConstants.ACCOUNT, idList, page, orderBean);
 
         Integer integer5 = logMapper.updateById(build1.getId(), build1);
-        Integer integer6 = logMapper.updateByExample(build1, build1);
 
+        Log build11 = new Log();
+        build11.setAccount("33");
+        build11.setAction("33");
+        build11.setContent("33");
+        build11.setCreateTime(new Date());
+        Integer integer6 = logMapper.updateByExample(build11, build2);
 
         PageList<Log> byExamplePage1 = logService.findByExamplePage(build1, page, orderBean);
         int i = logService.deleteById(2L);

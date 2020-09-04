@@ -5,6 +5,7 @@ import com.zheng.testeverything.base.Page;
 import com.zheng.testeverything.model.Log;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @author zhengchentong on 2019/10/21
  */
 @Mapper
+@Component
 public interface LogMapper {
 
     /**

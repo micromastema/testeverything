@@ -37,7 +37,7 @@ public class Page {
         this.startPosition = (this.currentPage - 1) * this.pageSize;
     }
 
-    public Page(int pageSize, int pageNum) {
+    public Page(int pageNum,int pageSize) {
         if (pageSize > 0 && pageSize <= maxPageSize) {
             this.pageSize = pageSize;
         }

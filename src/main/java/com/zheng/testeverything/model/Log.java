@@ -1,5 +1,6 @@
 package com.zheng.testeverything.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 public class Log {
 
     private Long id;

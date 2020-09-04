@@ -59,7 +59,7 @@
 		delete from log where id = #{id}
 	</delete>
 
-    <delete id="deleteBatch" parameterType="com.zheng.testeverything.model.Log" resultType="int">
+    <delete id="deleteBatch" parameterType="com.zheng.testeverything.model.Log">
         DELETE FROM log
         <where>
                 <if test='id != null'>and id = #{id}</if>
@@ -73,14 +73,14 @@
 	<update id="updateById" parameterType="java.lang.Long">
 		update log
 			<set>
-				<if test="account != null">
-					account = #{account},
+				<if test="log.account != null">
+					account = #{log.account},
 				</if>
-				<if test="action != null">
-					action = #{action},
+				<if test="log.action != null">
+					action = #{log.action},
 				</if>
-				<if test="content != null">
-					content = #{content},
+				<if test="log.content != null">
+					content = #{log.content},
 				</if>
 			</set>
 		where id = #{id}
@@ -114,7 +114,7 @@
         </where>
     </update>
 	
-	<select id="findById" parameterType="java.lang.Long" resultMap="Log_ResultMap">
+	<select id="findById"  parameterType="java.lang.Long" resultMap="Log_ResultMap">
 		select
 			<include refid="Log_Column_List" />
 			from log
@@ -126,20 +126,20 @@
 			count(id)
 			from log
 		 <where>
-			<if test="id != null">
-				and id = #{id}
+			<if test="log.id != null">
+				and id = #{log.id}
 			</if>
-			<if test="account != null">
-				and account = #{account}
+			<if test="log.account != null">
+				and account = #{log.account}
 			</if>
-			<if test="action != null">
-				and action = #{action}
+			<if test="log.action != null">
+				and action = #{log.action}
 			</if>
-			<if test="content != null">
-				and content = #{content}
+			<if test="log.content != null">
+				and content = #{log.content}
 			</if>
-			<if test="createTime != null">
-				and create_time = #{createTime}
+			<if test="log.createTime != null">
+				and create_time = #{log.createTime}
 			</if>
 		 </where>
 	</select>
@@ -223,7 +223,7 @@
     </select>
 
     <sql id="sqlEnd">
-	${orderBean}
+	${orderBean.orderSql}
         <if test="page!=null">
             limit ${page.startPosition} ,${page.pageSize}
         </if>

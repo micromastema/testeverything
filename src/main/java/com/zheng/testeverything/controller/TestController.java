@@ -23,12 +23,13 @@ public class TestController {
     @GetMapping("/t")
     public void test() {
 //        dataService.deala();
-//        dataService.dealb();
+//        dataService.dealb3();
 //        dataService.dealc();
 //        dataService.deald1();
 //        dataService.deald2();
 
         insertService.deala();
+        insertService.dealb3();
         insertService.dealc();
         insertService.deald1();
         insertService.deald2();

@@ -54,7 +54,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -161,8 +161,8 @@ public class InsertService {
     }
 
 
-    public void dealb(){
-        List<Map<String, String>> deala = dataService.dealb();
+    public void dealb3(){
+        List<Map<String, String>> deala = dataService.dealb3();
         List<TkTbKnwtree> entityList = new ArrayList<>();
         for (Map<String, String> stringStringMap : deala) {
             id++;
@@ -184,13 +184,13 @@ public class InsertService {
             Integer knwIsLeaf = 1;
             Integer knwType = 2;
             //====小学英语
-            String knwSubject = "3";
-            String subjectName = "英语";
+            String knwSubject = "2";
+            String subjectName = "数学";
             String knwStage = "170";
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -229,6 +229,9 @@ public class InsertService {
 
         for (TkTbKnwtree tkTbKnwtree : entityList) {
             for (TkTbKnwtree tbKnwtree : entityList) {
+                if(tbKnwtree.getId()==1248){
+                    System.out.println(tkTbKnwtree.getId());
+                }
                 if (tkTbKnwtree.getKnwId().equals(tbKnwtree.getKnwPid())) {
                     //是否叶子节点1是 0否
                     tkTbKnwtree.setKnwIsLeaf(0);
@@ -236,7 +239,13 @@ public class InsertService {
             }
         }
         for (TkTbKnwtree tkTbKnwtree : entityList) {
-            tkTbKnwtreeMapper.insert(tkTbKnwtree);
+            System.out.println(tkTbKnwtree.getId());
+            try {
+                tkTbKnwtreeMapper.insert(tkTbKnwtree);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
         return;
     }
@@ -270,7 +279,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -351,7 +360,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -432,7 +441,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -513,7 +522,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -594,7 +603,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -675,7 +684,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -756,7 +765,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -840,7 +849,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);
@@ -924,7 +933,7 @@ public class InsertService {
             String stageName = "小学";
             //====
             Integer knwTreeType = 1;
-            Integer chooseType = 0;
+            Integer chooseType = 1;
             TkTbKnwtree entity = new TkTbKnwtree();
             entity.setId(id);
             entity.setKnwId(knwId);

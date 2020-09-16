@@ -51,11 +51,11 @@ public class DataService {
         return result;
     }
 
-    public List<Map<String, String>> dealb() {
+    public List<Map<String, String>> dealb3() {
         //TODO 人教版
         List<Map<String, String>> result = new ArrayList<>();
 
-        List<String> line = importData("classpath:data/b.txt");
+        List<String> line = importData("classpath:data/b3.txt");
         String[][] data = new String[10000][10000];
         //1年级上册 第一单元 数一数 几个图形
         Map<String, String> a = new HashMap<>();
@@ -68,31 +68,91 @@ public class DataService {
         int erji = 0;
         int sanji = 0;
         int siji = 0;
+        int wuji =0;
+        int liuji = 0;
         String bianhao = "";
         for (int i = 0; i < data.length; i++) {
-            if (!StringUtils.isEmpty(data[i][2])) {
-                erji++;
-                bianhao = yiji+"-"+erji +"";
+            if (!StringUtils.isEmpty(data[i][0])) {
+                yiji++;
+                bianhao = yiji + "";
                 Map<String, String> resultMap = new HashMap<>();
-                resultMap.put("name", data[i][2].replaceAll("\t",""));
+                resultMap.put("name", data[i][0].replaceAll("\t", ""));
+                resultMap.put("num", bianhao);
+                result.add(resultMap);
+            }
+            if (!StringUtils.isEmpty(data[i][1])) {
+                erji++;
+                bianhao = yiji + "-" + erji + "";
+                Map<String, String> resultMap = new HashMap<>();
+                resultMap.put("name", data[i][1].replaceAll("\t", ""));
+                resultMap.put("num", bianhao);
+                result.add(resultMap);
+            }
+            if (!StringUtils.isEmpty(data[i][2])) {
+                sanji++;
+                bianhao = yiji + "-" + erji + "-" + sanji;
+                Map<String, String> resultMap = new HashMap<>();
+                resultMap.put("name", data[i][2].replaceAll("\t", ""));
                 resultMap.put("num", bianhao);
                 result.add(resultMap);
             }
             if (!StringUtils.isEmpty(data[i][3])) {
-                sanji ++;
-                bianhao =yiji+"-"+erji+"-"+ sanji;
+                siji++;
+                bianhao = yiji + "-" + erji + "-" + sanji + "-" + siji;
                 Map<String, String> resultMap = new HashMap<>();
-                resultMap.put("name", data[i][3].replaceAll("\t",""));
+                resultMap.put("name", data[i][3].replaceAll("\t", ""));
                 resultMap.put("num", bianhao);
                 result.add(resultMap);
             }
-            if(i>1&&!StringUtils.isEmpty(data[i][2])){
-                sanji = 0;
-                bianhao = "";
+            if (!StringUtils.isEmpty(data[i][4])) {
+                wuji++;
+                bianhao = yiji + "-" + erji + "-" + sanji + "-" + siji+"-"+wuji;
+                Map<String, String> resultMap = new HashMap<>();
+                resultMap.put("name", data[i][4].replaceAll("\t", ""));
+                resultMap.put("num", bianhao);
+                result.add(resultMap);
             }
-            if(i>1&&!StringUtils.isEmpty(data[i][1])){
+            if (!StringUtils.isEmpty(data[i][5])) {
+                liuji++;
+                bianhao = yiji + "-" + erji + "-" + sanji + "-" + siji+"-"+wuji+"-"+liuji;
+                Map<String, String> resultMap = new HashMap<>();
+                resultMap.put("name", data[i][5].replaceAll("\t", ""));
+                resultMap.put("num", bianhao);
+                result.add(resultMap);
+            }
+
+            //1-1-1-1
+            //1-1-2
+            //1-2
+            //2
+            if (i > 1 && !StringUtils.isEmpty(data[i][0])) {
                 erji = 0;
                 sanji = 0;
+                siji = 0;
+                wuji = 0;
+                liuji = 0;
+                bianhao = "";
+            }
+            if (i > 1 && !StringUtils.isEmpty(data[i][1])) {
+                sanji = 0;
+                siji = 0;
+                wuji = 0;
+                liuji = 0;
+                bianhao = "";
+            }
+            if (i > 1 && !StringUtils.isEmpty(data[i][2])) {
+                siji = 0;
+                wuji = 0;
+                liuji = 0;
+                bianhao = "";
+            }
+            if (i > 1 && !StringUtils.isEmpty(data[i][3])) {
+                wuji = 0;
+                liuji = 0;
+                bianhao = "";
+            }
+            if (i > 1 && !StringUtils.isEmpty(data[i][4])) {
+                liuji = 0;
                 bianhao = "";
             }
         }
@@ -106,8 +166,8 @@ public class DataService {
         for (String s1 : s) {
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
@@ -125,8 +185,8 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
@@ -144,8 +204,8 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
@@ -163,8 +223,8 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
@@ -182,14 +242,15 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
         }
         return result;
     }
+
     public List<Map<String, String>> deald6() {
         List<Map<String, String>> result = new ArrayList<>();
 
@@ -200,14 +261,15 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
         }
         return result;
     }
+
     public List<Map<String, String>> deald7() {
         List<Map<String, String>> result = new ArrayList<>();
 
@@ -218,14 +280,15 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
         }
         return result;
     }
+
     public List<Map<String, String>> deald8() {
         List<Map<String, String>> result = new ArrayList<>();
 
@@ -236,14 +299,15 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);
         }
         return result;
     }
+
     public List<Map<String, String>> deald9() {
         List<Map<String, String>> result = new ArrayList<>();
 
@@ -254,8 +318,8 @@ public class DataService {
             }
             String[] split1 = s1.split("\t");
             Map<String, String> splitMap = new HashMap<>();
-            splitMap.put("name",split1[1]);
-            splitMap.put("num", split1[0].replaceAll("\\.","-"));
+            splitMap.put("name", split1[1]);
+            splitMap.put("num", split1[0].replaceAll("\\.", "-"));
             result.add(splitMap);
             System.out.println(split1[0]);
             System.out.println(split1[1]);

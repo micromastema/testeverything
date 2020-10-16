@@ -130,4 +130,6 @@ public class TkTbKnwtree {
     private Integer sysCode;
 
     private String num;
+
+    private String tpsLevelCode;
 }

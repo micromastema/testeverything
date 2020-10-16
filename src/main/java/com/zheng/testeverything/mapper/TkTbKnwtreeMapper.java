@@ -184,12 +184,13 @@ public interface TkTbKnwtreeMapper {
             "<if test='tkTbKnwtree.editTime != null'>`edit_time` = #{tkTbKnwtree.editTime},</if>",
             "<if test='tkTbKnwtree.editorName != null'>`editor_name` = #{tkTbKnwtree.editorName},</if>",
             "<if test='tkTbKnwtree.flagUse != null'>`flag_use` = #{tkTbKnwtree.flagUse},</if>",
-            "<if test='tkTbKnwtree.sysCode != null'>`sys_code` = #{tkTbKnwtree.sysCode}</if>",
+            "<if test='tkTbKnwtree.sysCode != null'>`sys_code` = #{tkTbKnwtree.sysCode},</if>",
+            "<if test='tkTbKnwtree.tpsLevelCode != null'>`tps_level_code` = #{tkTbKnwtree.tpsLevelCode}</if>",
             "</set>",
             "WHERE id = #{id}",
             "</script>"
     })
-    Integer updateById(@Param("id") Integer id, @Param("tkTbKnwtree") TkTbKnwtree tkTbKnwtree);
+    Integer updateById(@Param("id") Long id, @Param("tkTbKnwtree") TkTbKnwtree tkTbKnwtree);
 
     /**
      * 批量更新数据
@@ -291,6 +292,7 @@ public interface TkTbKnwtreeMapper {
             "`knw_stage` AS `knwStage`,",
             "`stage_name` AS `stageName`,",
             "`knw_alias_name` AS `knwAliasName`,",
+            "`tps_level_code` AS `tpsLevelCode`,",
             "`knw_title_index` AS `knwTitleIndex`,",
             "`knw_tree_type` AS `knwTreeType`,",
             "`knw_name_pinyin` AS `knwNamePinyin`,",

@@ -3,11 +3,13 @@ package com.zheng.testeverything.model1;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 /**
  * @author zhengchentong on 2019-06-14
  */
 @Mapper
+@Component
 public interface TestMapper1 {
 
     @Select("select teacher from t1 where username = #{username}")
@@ -27,4 +29,6 @@ public interface TestMapper1 {
     @Insert("INSERT INTO `database1`.`t1`(`username`, `password`, `sex`, `class`, `teacher`, `teachername`, `father`, `mather`, `parent`, `son`, `sister`, `haha`) VALUES (#{a},  #{b} ,  #{c} ,  #{d} ,  #{e} ,  #{f} ,  #{g} ,  #{a} ,  #{b} ,  #{a} ,  #{a} ,  #{a} )")
     public void insert(String a, String b, String c, String d, String e, String f, String g);
 
+    @Select("select 1")
+    String test();
 }

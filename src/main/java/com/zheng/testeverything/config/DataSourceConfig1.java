@@ -35,12 +35,6 @@ public class DataSourceConfig1 {
         return bean.getObject();
     }
 
-    //事务管理
-    @Bean(name = "test1TransactionManager")
-    public DataSourceTransactionManager testTransactionManager(@Qualifier("test1DataSource") DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
-    }
-
     @Bean(name = "test1SqlSessionTemplate")
     public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("test1SqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);

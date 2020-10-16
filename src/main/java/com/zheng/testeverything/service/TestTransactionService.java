@@ -41,4 +41,9 @@ public class TestTransactionService {
         testDao1.insert1();
         testDao2.insert1();
     }
+
+    public void test(){
+        testDao1.test();
+        testDao2.test();
+    }
 }

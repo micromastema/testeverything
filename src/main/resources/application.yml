@@ -1,10 +1,10 @@
 spring:
   datasource:
     d1:
-      jdbc-url: jdbc:mysql://localhost:3306/database1?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 123456
+      jdbc-url: jdbc:sqlserver://172.24.202.63:1433;DatabaseName=NOE_ILEARN_ZXL;ApplicationIntent=ReadWrite
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      username: sa
+      password: axc123$#@
       type: com.zaxxer.hikari.HikariDataSource
       hikari:
         minimum-idle: 100
@@ -13,10 +13,10 @@ spring:
         connection-timeout: 30000
         connection-test-query: select 1
     d2:
-      jdbc-url: jdbc:mysql://localhost:3306/database2?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
+      jdbc-url: jdbc:mysql://localhost:3306/tps_tiku?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
-      password: 123456
+      password:
       type: com.zaxxer.hikari.HikariDataSource
       hikari:
         minimum-idle: 100
@@ -29,3 +29,4 @@ server:
     uri-encoding: utf-8
     max-threads: 200
     max-connections: 10000
+  port: 8082
